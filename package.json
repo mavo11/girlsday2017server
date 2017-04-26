@@ -12,7 +12,8 @@
   "dependencies": {
     "ejs": "2.4.1",
     "express": "4.13.3",
-    "instagram-node": "^0.5.8"
+    "instagram-node": "^0.5.8",
+    "twit": "^2.2.5"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,34 @@
 var express = require('express');
 var app = express();
+var Twit = require('twit')
 
+var T = new Twit({
+  consumer_key:         'ZSriPSjaA3Aq4GSVzFdVlrD6C',
+  consumer_secret:      'YjKsafdYkvGdHxolpnBmE4dAIcfTYIbt17O5PZIcfg9G4dJYLb',
+  access_token:         '23419796-rPKRJ2jxEE8jaZEgtZFNv8rtTpgV3whrUI8QMc057',
+  access_token_secret:  'RbJz8tDjWpH1Bf6YqAYrQqZu32AZvmak1gXvfpyRZKaRd',
+  timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+})
+
+T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
+  console.log(data)
+})
+
+
+app.set('port', (process.env.PORT || 5000));
+
+app.get('/', function(request, res) {
+  res.setHeader('Content-Type', 'application/json');
+  T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
+    res.send(JSON.stringify(data));
+  });
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
+
+/*
 var api = require('instagram-node').instagram();
 
 app.configure(function() {
@@ -36,6 +64,7 @@ app.get('/handleauth', exports.handleauth);
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+*/
 /*
 app.set('port', (process.env.PORT || 5000));
 
