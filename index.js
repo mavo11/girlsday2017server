@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
-var Twit = require('twit')
+var Twit = require('twit');
+
+var ig = require('instagram-node').instagram();
+ig.use({ access_token: '41453802.f59198a.da80739876174520943eb0861a4636a2' });
+ig.use({ client_id: 'f59198a1cff94be480c7f5cdbb01c265',
+         client_secret: '7edf6321383f48098ad6d7290a2dabf4' });
 
 var T = new Twit({
   consumer_key:         'ZSriPSjaA3Aq4GSVzFdVlrD6C',
@@ -12,13 +17,22 @@ var T = new Twit({
 
 app.set('port', (process.env.PORT || 5000));
 
-app.get('/', function(request, res) {
+app.get('/twitter/', function(request, res) {
   res.setHeader('Content-Type', 'application/json');
   var query = request.query.tag;
   var count = request.query.count;
   T.get('search/tweets', { q: query, count: count }, function(err, data, response) {
     res.send(JSON.stringify(data));
   });
+});
+
+app.get('/insta/', function(request, res) {
+  res.setHeader('Content-Type', 'application/json');
+  var query = request.query.tag;
+  ig.tag_search('query', function(err, result, remaining, limit) {
+    res.send(JSON.stringify(result));
+  });
+
 });
 
 app.listen(app.get('port'), function() {
