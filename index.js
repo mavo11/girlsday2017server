@@ -19,7 +19,9 @@ app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function(request, res) {
   res.setHeader('Content-Type', 'application/json');
-  T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {
+  var query = request.query.tag;
+  var count = request.query.count;
+  T.get('search/tweets', { q: query, count: count }, function(err, data, response) {
     res.send(JSON.stringify(data));
   });
 });
