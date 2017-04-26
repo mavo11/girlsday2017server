@@ -21,9 +21,16 @@ app.get('/twitter/', function(request, res) {
   res.setHeader('Content-Type', 'application/json');
   var query = request.query.tag;
   var count = request.query.count;
+  /*
   T.get('search/tweets', { q: query, count: count }, function(err, data, response) {
     res.send(JSON.stringify(data));
   });
+  */
+  var stream = T.stream('statuses/filter', { track: query })
+
+  stream.on('tweet', function (tweet) {
+    res.send(JSON.stringify(tweet));
+  })
 });
 
 app.get('/insta/', function(request, res) {
