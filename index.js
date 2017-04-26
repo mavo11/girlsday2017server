@@ -30,7 +30,7 @@ app.get('/insta/', function(request, res) {
   res.setHeader('Content-Type', 'application/json');
   var query = request.query.tag;
   ig.tag_search('query', function(err, result, remaining, limit) {
-    res.send(JSON.stringify(result));
+    res.send("blabla"+JSON.stringify(result)+JSON.stringify(err));
   });
 
 });
