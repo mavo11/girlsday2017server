@@ -31,6 +31,8 @@ app.get('/twitter/', function(request, res) {
   stream.on('tweet', function (tweet) {
     res.send(JSON.stringify(tweet));
   })*/
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 });
 
 app.get('/insta/', function(request, res) {

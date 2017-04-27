@@ -1,7 +1,7 @@
 {
   "name": "Start on Heroku: Node.js",
   "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/bastifantasti/girlsday2017server.git",
+  "repository": "https://github.com/mavo11/girlsday2017server.git",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express", "static"],
   "image": "heroku/nodejs"
